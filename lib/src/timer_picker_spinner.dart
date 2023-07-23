@@ -8,6 +8,7 @@ typedef TimePickerCallback = void Function(DateTime);
 class TimeSelectorSpinner extends StatefulWidget {
   final double width;
   final double height;
+  final double fontSize;
   final double? itemWidth;
   final double? itemSpace;
   final TimePickerCallback? onTimeChange;
@@ -22,6 +23,7 @@ class TimeSelectorSpinner extends StatefulWidget {
     this.onTimeChange,
     required this.selectedFontColor,
     required this.unselectedFontColor,
+    required this.fontSize,
   });
 
   @override
@@ -45,6 +47,7 @@ class _TimeSelectorSpinnerState extends State<TimeSelectorSpinner> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TimePickerElementWidget(
+                      fontSize: widget.fontSize,
                       itemWidth: widget.itemWidth!,
                       onTimeChange: widget.onTimeChange,
                       selectedFontColor: widget.selectedFontColor,
@@ -54,6 +57,7 @@ class _TimeSelectorSpinnerState extends State<TimeSelectorSpinner> {
                       type: SpinnerType.hour),
                   SizedBox(width: widget.itemSpace),
                   TimePickerElementWidget(
+                      fontSize: widget.fontSize,
                       itemWidth: widget.itemWidth!,
                       onTimeChange: widget.onTimeChange,
                       selectedFontColor: widget.selectedFontColor,
@@ -62,6 +66,7 @@ class _TimeSelectorSpinnerState extends State<TimeSelectorSpinner> {
                       type: SpinnerType.minute),
                   SizedBox(width: widget.itemSpace),
                   TimePickerElementWidget(
+                      fontSize: widget.fontSize,
                       itemWidth: widget.itemWidth!,
                       onTimeChange: widget.onTimeChange,
                       selectedFontColor: widget.selectedFontColor,
@@ -78,6 +83,7 @@ class _TimeSelectorSpinnerState extends State<TimeSelectorSpinner> {
 
 class TimePickerElementWidget extends StatelessWidget {
   final double itemWidth;
+  final double fontSize;
   final SpinnerType type;
   final TimeSpinnerBloc bloc;
   final int? maxCount;
@@ -93,6 +99,7 @@ class TimePickerElementWidget extends StatelessWidget {
     this.onTimeChange,
     required this.selectedFontColor,
     required this.unselectedFontColor,
+    required this.fontSize,
   });
 
   @override
@@ -127,7 +134,7 @@ class TimePickerElementWidget extends StatelessWidget {
                     : '${index % 60}'.padLeft(2, "0")),
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 26,
+              fontSize: fontSize,
               color: index ==
                       (type == SpinnerType.hour
                           ? bloc.state.hour

@@ -46,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             TimeSelectorSpinner(
+              fontSize: 26,
               height: 0.4.sh,
               width: 0.95.sw,
               selectedFontColor: Colors.black,
